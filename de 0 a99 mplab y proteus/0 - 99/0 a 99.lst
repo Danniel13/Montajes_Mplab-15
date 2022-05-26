@@ -1,0 +1,153 @@
+CCS PCM C Compiler, Version 4.104, 5967               19-Oct-13 19:12
+
+               Filename: C:\Documents and Settings\Usuario  Electronica\Escritorio\Nueva carpeta\0 a 99.lst
+
+               ROM used: 92 words (1%)
+                         Largest free fragment is 2048
+               RAM used: 9 (2%) at main() level
+                         10 (3%) worst case
+               Stack:    1 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   012
+0003:  NOP
+.................... #include<16f877a.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #use delay(clock=2000000) 
+*
+0004:  MOVLW  24
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   011
+000A:  MOVLW  A5
+000B:  MOVWF  77
+000C:  DECFSZ 77,F
+000D:  GOTO   00C
+000E:  NOP
+000F:  DECFSZ 00,F
+0010:  GOTO   00A
+0011:  RETURN
+.................... #fuses xt,nowdt,protect,NOLVP 
+.................... #byte PORTD=0X08 
+.................... #byte PORTC=0X07 
+.................... int x,i; 
+.................... void main() 
+.................... { 
+0012:  CLRF   04
+0013:  BCF    03.7
+0014:  MOVLW  1F
+0015:  ANDWF  03,F
+0016:  BSF    03.5
+0017:  BSF    1F.0
+0018:  BSF    1F.1
+0019:  BSF    1F.2
+001A:  BCF    1F.3
+001B:  MOVLW  07
+001C:  MOVWF  1C
+.................... set_tris_d(0); 
+*
+0020:  MOVLW  00
+0021:  BSF    03.5
+0022:  MOVWF  08
+.................... set_tris_c(0); 
+0023:  MOVWF  07
+0024:  BCF    03.5
+0025:  MOVWF  22
+.................... PORTD=0; 
+0026:  CLRF   08
+.................... PORTC=0; 
+0027:  CLRF   07
+.................... while(TRUE) 
+.................... { 
+.................... if(INPUT(PIN_B0)) 
+0028:  BSF    03.5
+0029:  BSF    06.0
+002A:  BCF    03.5
+002B:  BTFSS  06.0
+002C:  GOTO   05A
+.................... { 
+.................... for(i=0;i<=9;i++) 
+002D:  CLRF   21
+002E:  MOVF   21,W
+002F:  SUBLW  09
+0030:  BTFSS  03.0
+0031:  GOTO   058
+.................... { 
+.................... for(x=0;x<=8;x++) 
+0032:  CLRF   20
+0033:  MOVF   20,W
+0034:  SUBLW  08
+0035:  BTFSS  03.0
+0036:  GOTO   047
+.................... { 
+.................... PORTD=PORTD+1; 
+0037:  MOVLW  01
+0038:  ADDWF  08,F
+.................... delay_ms(300); 
+0039:  MOVLW  02
+003A:  MOVWF  23
+003B:  MOVLW  96
+003C:  MOVWF  24
+003D:  CALL   004
+003E:  DECFSZ 23,F
+003F:  GOTO   03B
+.................... if(PORTD==9) 
+0040:  MOVF   08,W
+0041:  SUBLW  09
+0042:  BTFSS  03.2
+0043:  GOTO   045
+.................... { 
+.................... PORTD=0; 
+0044:  CLRF   08
+.................... } 
+....................  
+.................... } 
+0045:  INCF   20,F
+0046:  GOTO   033
+....................  
+.................... if(i==9) 
+0047:  MOVF   21,W
+0048:  SUBLW  09
+0049:  BTFSS  03.2
+004A:  GOTO   04D
+.................... { 
+.................... PORTC=PORTC-1; 
+004B:  MOVLW  01
+004C:  SUBWF  07,F
+.................... } 
+.................... PORTC=PORTC+1; 
+004D:  MOVLW  01
+004E:  ADDWF  07,F
+.................... delay_ms(300); 
+004F:  MOVLW  02
+0050:  MOVWF  23
+0051:  MOVLW  96
+0052:  MOVWF  24
+0053:  CALL   004
+0054:  DECFSZ 23,F
+0055:  GOTO   051
+....................  
+.................... } 
+0056:  INCF   21,F
+0057:  GOTO   02E
+....................  
+.................... PORTD=0; 
+0058:  CLRF   08
+.................... PORTC=0; 
+0059:  CLRF   07
+....................  
+.................... } 
+.................... } 
+005A:  GOTO   028
+.................... } 
+005B:  SLEEP
+
+Configuration Fuses:
+   Word  1: 1F71   XT NOWDT PUT PROTECT NODEBUG BROWNOUT NOLVP NOCPD NOWRT
